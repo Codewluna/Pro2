@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attractive To-Do List</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body class="bg-gradient" style="background: linear-gradient(135deg, #f8fafc 0%, #cfd9df 100%); min-height: 100vh;">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card shadow-lg rounded-4">
+          <div class="card-body p-4">
+            <h2 class="card-title text-center mb-4 fw-bold text-primary">To-Do List</h2>
+            <form id="todo-form" class="d-flex mb-3">
+              <input type="text" id="todo-input" class="form-control me-2 rounded-pill" placeholder="Add a new task..." required>
+              <button type="submit" class="btn btn-primary rounded-pill px-4">Add</button>
+            </form>
+            <ul id="todo-list" class="list-group list-group-flush">
+              <!-- Tasks will appear here -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('todo-form');
+    const input = document.getElementById('todo-input');
+    const list = document.getElementById('todo-list');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if(input.value.trim() !== '') {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center rounded-3 mb-2 shadow-sm';
+        li.innerHTML = `<span>${input.value}</span>
+          <button class='btn btn-sm btn-danger rounded-pill delete-btn'>Delete</button>`;
+        list.appendChild(li);
+        input.value = '';
+      }
+    });
+    list.addEventListener('click', function(e) {
+      if(e.target.classList.contains('delete-btn')) {
+        e.target.parentElement.remove();
+      }
+    });
+  </script>
+</body>
+</html>
